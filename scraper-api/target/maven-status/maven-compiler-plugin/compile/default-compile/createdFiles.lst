@@ -1,0 +1,12 @@
+com\scraper\api\dto\CreateJobRequest.class
+com\scraper\api\config\KafkaProducerConfig.class
+com\scraper\api\mapper\JobMapper.class
+com\scraper\api\dto\JobResponse$JobResponseBuilder.class
+com\scraper\api\repository\JobRepository.class
+com\scraper\api\entity\JobEntity.class
+com\scraper\api\controller\JobController.class
+com\scraper\api\dto\JobResponse.class
+com\scraper\api\config\OpenApiConfig.class
+com\scraper\api\entity\JobEntity$JobEntityBuilder.class
+com\scraper\api\service\JobService.class
+com\scraper\api\ScraperApiApplication.class

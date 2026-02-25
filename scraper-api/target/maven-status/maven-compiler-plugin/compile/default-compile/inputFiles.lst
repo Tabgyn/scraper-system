@@ -1,0 +1,10 @@
+C:\Users\Tiago\source\repos\scraper-system\scraper-api\src\main\java\com\scraper\api\config\KafkaProducerConfig.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-api\src\main\java\com\scraper\api\config\OpenApiConfig.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-api\src\main\java\com\scraper\api\controller\JobController.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-api\src\main\java\com\scraper\api\dto\CreateJobRequest.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-api\src\main\java\com\scraper\api\dto\JobResponse.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-api\src\main\java\com\scraper\api\entity\JobEntity.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-api\src\main\java\com\scraper\api\mapper\JobMapper.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-api\src\main\java\com\scraper\api\repository\JobRepository.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-api\src\main\java\com\scraper\api\ScraperApiApplication.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-api\src\main\java\com\scraper\api\service\JobService.java

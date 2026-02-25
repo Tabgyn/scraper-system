@@ -1,0 +1,1 @@
+### Note: In production replace stringData with base64-encoded data values or use an external secrets manager (Vault, AWS Secrets Manager).

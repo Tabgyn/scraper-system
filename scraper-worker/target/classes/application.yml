@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: scraper-worker
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/scraper
+    username: scraper
+    password: scraper
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: scraper-workers
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

@@ -1,0 +1,12 @@
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\config\KafkaConsumerConfig.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\config\KafkaProducerConfig.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\config\PlaywrightConfig.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\config\WebClientConfig.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\exception\ScrapeException.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\proxy\ProxyHealthChecker.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\proxy\ProxyManager.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\ScraperWorkerApplication.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\service\ResultPublisher.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\worker\ApiWorker.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\worker\HttpWorker.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\worker\JsWorker.java

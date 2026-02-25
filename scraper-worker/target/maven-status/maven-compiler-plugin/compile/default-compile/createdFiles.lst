@@ -1,0 +1,12 @@
+com\scraper\worker\config\WebClientConfig.class
+com\scraper\worker\worker\ApiWorker.class
+com\scraper\worker\config\PlaywrightConfig.class
+com\scraper\worker\exception\ScrapeException.class
+com\scraper\worker\config\KafkaConsumerConfig.class
+com\scraper\worker\proxy\ProxyManager.class
+com\scraper\worker\config\KafkaProducerConfig.class
+com\scraper\worker\ScraperWorkerApplication.class
+com\scraper\worker\service\ResultPublisher.class
+com\scraper\worker\worker\HttpWorker.class
+com\scraper\worker\worker\JsWorker.class
+com\scraper\worker\proxy\ProxyHealthChecker.class

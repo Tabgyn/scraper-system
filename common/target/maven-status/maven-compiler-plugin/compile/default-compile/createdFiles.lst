@@ -1,0 +1,13 @@
+com\scraper\common\events\ScrapeJobEvent.class
+com\scraper\common\events\ScrapeResultEvent.class
+com\scraper\common\model\ProxyConfig.class
+com\scraper\common\model\ScrapeJob.class
+com\scraper\common\enums\ProxyStatus.class
+com\scraper\common\events\ScrapeJobEvent$ScrapeJobEventBuilder.class
+com\scraper\common\model\ProxyConfig$ProxyConfigBuilder.class
+com\scraper\common\model\ScrapeResult.class
+com\scraper\common\model\ScrapeJob$ScrapeJobBuilder.class
+com\scraper\common\enums\JobStatus.class
+com\scraper\common\enums\JobType.class
+com\scraper\common\events\ScrapeResultEvent$ScrapeResultEventBuilder.class
+com\scraper\common\model\ScrapeResult$ScrapeResultBuilder.class

@@ -1,0 +1,8 @@
+C:\Users\Tiago\source\repos\scraper-system\common\src\main\java\com\scraper\common\enums\JobStatus.java
+C:\Users\Tiago\source\repos\scraper-system\common\src\main\java\com\scraper\common\enums\JobType.java
+C:\Users\Tiago\source\repos\scraper-system\common\src\main\java\com\scraper\common\enums\ProxyStatus.java
+C:\Users\Tiago\source\repos\scraper-system\common\src\main\java\com\scraper\common\events\ScrapeJobEvent.java
+C:\Users\Tiago\source\repos\scraper-system\common\src\main\java\com\scraper\common\events\ScrapeResultEvent.java
+C:\Users\Tiago\source\repos\scraper-system\common\src\main\java\com\scraper\common\model\ProxyConfig.java
+C:\Users\Tiago\source\repos\scraper-system\common\src\main\java\com\scraper\common\model\ScrapeJob.java
+C:\Users\Tiago\source\repos\scraper-system\common\src\main\java\com\scraper\common\model\ScrapeResult.java

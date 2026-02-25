@@ -9,6 +9,7 @@
         <module name="common" />
         <module name="scraper-api" />
         <module name="scraper-worker" />
+        <module name="scraper-scheduler" />
       </profile>
     </annotationProcessing>
   </component>

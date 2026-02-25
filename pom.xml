@@ -16,7 +16,7 @@
     <modules>
         <module>common</module>
         <module>scraper-api</module>
-<!--        <module>scraper-scheduler</module>-->
+        <module>scraper-scheduler</module>
         <module>scraper-worker</module>
 <!--        <module>results-processor</module>-->
     </modules>

@@ -1,0 +1,10 @@
+C:\Users\Tiago\source\repos\scraper-system\scraper-scheduler\src\main\java\com\scraper\scheduler\config\KafkaProducerConfig.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-scheduler\src\main\java\com\scraper\scheduler\config\QuartzConfig.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-scheduler\src\main\java\com\scraper\scheduler\controller\ScheduleController.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-scheduler\src\main\java\com\scraper\scheduler\dto\CreateScheduleRequest.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-scheduler\src\main\java\com\scraper\scheduler\dto\ScheduleResponse.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-scheduler\src\main\java\com\scraper\scheduler\entity\ScheduleEntity.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-scheduler\src\main\java\com\scraper\scheduler\job\ScrapeQuartzJob.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-scheduler\src\main\java\com\scraper\scheduler\repository\ScheduleRepository.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-scheduler\src\main\java\com\scraper\scheduler\ScraperSchedulerApplication.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-scheduler\src\main\java\com\scraper\scheduler\service\SchedulerService.java

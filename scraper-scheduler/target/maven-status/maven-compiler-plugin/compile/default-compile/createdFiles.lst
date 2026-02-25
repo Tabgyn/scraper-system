@@ -1,0 +1,12 @@
+com\scraper\scheduler\dto\CreateScheduleRequest.class
+com\scraper\scheduler\entity\ScheduleEntity$ScheduleEntityBuilder.class
+com\scraper\scheduler\repository\ScheduleRepository.class
+com\scraper\scheduler\controller\ScheduleController.class
+com\scraper\scheduler\dto\ScheduleResponse.class
+com\scraper\scheduler\job\ScrapeQuartzJob.class
+com\scraper\scheduler\config\KafkaProducerConfig.class
+com\scraper\scheduler\entity\ScheduleEntity.class
+com\scraper\scheduler\config\QuartzConfig.class
+com\scraper\scheduler\dto\ScheduleResponse$ScheduleResponseBuilder.class
+com\scraper\scheduler\service\SchedulerService.class
+com\scraper\scheduler\ScraperSchedulerApplication.class

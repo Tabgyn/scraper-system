@@ -18,7 +18,7 @@
         <module>scraper-api</module>
         <module>scraper-scheduler</module>
         <module>scraper-worker</module>
-<!--        <module>results-processor</module>-->
+        <module>results-processor</module>
     </modules>
 
     <properties>

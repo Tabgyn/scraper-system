@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: results-processor
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/scraper
+    redis:
+      host: localhost
+      port: 6379
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: results-processors
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+
+server:
+  port: 8083
+
+scraper:
+  s3:
+    bucket: scraper-raw
+    region: us-east-1
+    access-key: minioadmin
+    secret-key: minioadmin
+    endpoint: http://localhost:9000  # MinIO for local dev
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

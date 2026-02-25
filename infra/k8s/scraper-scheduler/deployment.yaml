@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scraper-scheduler
+  namespace: scraper
+  labels:
+    app: scraper-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scraper-scheduler
+  template:
+    metadata:
+      labels:
+        app: scraper-scheduler
+    spec:
+      containers:
+        - name: scraper-scheduler
+          image: scraper/scraper-scheduler:latest
+          ports:
+            - containerPort: 8082
+          envFrom:
+            - configMapRef:
+                name: scraper-config
+            - secretRef:
+                name: scraper-secrets
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: scraper-config
+                  key: POSTGRES_URL
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: scraper-secrets
+                  key: POSTGRES_PASSWORD
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: scraper-config
+                  key: KAFKA_BOOTSTRAP_SERVERS
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8082
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8082
+            initialDelaySeconds: 40
+            periodSeconds: 15
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"

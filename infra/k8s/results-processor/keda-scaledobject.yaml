@@ -1,0 +1,20 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: results-processor-scaledobject
+  namespace: scraper
+spec:
+  scaleTargetRef:
+    name: results-processor
+  pollingInterval: 15
+  cooldownPeriod: 60
+  minReplicaCount: 2
+  maxReplicaCount: 20
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: kafka:9092
+        consumerGroup: results-processors
+        topic: results.raw
+        lagThreshold: "200"
+        offsetResetPolicy: earliest

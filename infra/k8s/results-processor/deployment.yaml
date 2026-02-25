@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: results-processor
+  namespace: scraper
+  labels:
+    app: results-processor
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: results-processor
+  template:
+    metadata:
+      labels:
+        app: results-processor
+    spec:
+      containers:
+        - name: results-processor
+          image: scraper/results-processor:latest
+          ports:
+            - containerPort: 8083
+          envFrom:
+            - configMapRef:
+                name: scraper-config
+            - secretRef:
+                name: scraper-secrets
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: scraper-config
+                  key: MONGODB_URI
+            - name: SPRING_DATA_REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: scraper-config
+                  key: REDIS_HOST
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: scraper-config
+                  key: KAFKA_BOOTSTRAP_SERVERS
+            - name: SCRAPER_S3_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: scraper-config
+                  key: S3_ENDPOINT
+            - name: SCRAPER_S3_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: scraper-secrets
+                  key: S3_ACCESS_KEY
+            - name: SCRAPER_S3_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: scraper-secrets
+                  key: S3_SECRET_KEY
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8083
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8083
+            initialDelaySeconds: 40
+            periodSeconds: 15
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"

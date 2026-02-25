@@ -1,0 +1,27 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: scraper-worker-scaledobject
+  namespace: scraper
+spec:
+  scaleTargetRef:
+    name: scraper-worker
+  pollingInterval: 15
+  cooldownPeriod: 60
+  minReplicaCount: 2
+  maxReplicaCount: 50
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: kafka:9092
+        consumerGroup: scraper-workers
+        topic: jobs.pending
+        lagThreshold: "100"
+        offsetResetPolicy: earliest
+    - type: kafka
+      metadata:
+        bootstrapServers: kafka:9092
+        consumerGroup: scraper-workers
+        topic: jobs.retry
+        lagThreshold: "50"
+        offsetResetPolicy: earliest

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scraper-config
+  namespace: scraper
+data:
+  KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+  POSTGRES_URL: "jdbc:postgresql://postgres:5432/scraper"
+  POSTGRES_USERNAME: "scraper"
+  MONGODB_URI: "mongodb://mongodb:27017/scraper"
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+  S3_ENDPOINT: "http://minio:9000"
+  S3_REGION: "us-east-1"
+  S3_BUCKET: "scraper-raw"

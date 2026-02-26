@@ -1,7 +1,9 @@
 package com.scraper.worker.worker;
 
+import com.scraper.common.enums.JobType;
 import com.scraper.common.events.ScrapeJobEvent;
 import com.scraper.common.model.ProxyConfig;
+import com.scraper.worker.metrics.WorkerMetrics;
 import com.scraper.worker.proxy.ProxyManager;
 import com.scraper.worker.service.ResultPublisher;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class HttpWorker {
     private final WebClient.Builder webClientBuilder;
     private final ProxyManager proxyManager;
     private final ResultPublisher resultPublisher;
+    private final WorkerMetrics workerMetrics;
 
     @KafkaListener(
             topics = "jobs.pending",
@@ -30,7 +33,7 @@ public class HttpWorker {
             containerFactory = "kafkaListenerContainerFactory"
     )
     public void consume(ScrapeJobEvent event, Acknowledgment ack) {
-        if (event.getJobType() != com.scraper.common.enums.JobType.HTTP) {
+        if (event.getJobType() != JobType.HTTP) {
             ack.acknowledge();
             return;
         }
@@ -46,14 +49,20 @@ public class HttpWorker {
             }
 
             ProxyConfig proxy = proxyManager.nextProxy();
-            String rawHtml = fetchWithWebClient(event, proxy);
+            String rawContent = fetchWithWebClient(event, proxy);
 
             long duration = Instant.now().toEpochMilli() - start;
             // S3 key placeholder — wired in results-processor
             String s3Key = "raw/" + event.getJobId() + ".html";
 
-            resultPublisher.publishSuccess(event.getJobId(), event.getUrl(),
-                    200, s3Key, duration);
+            resultPublisher.publishSuccess(
+                    event.getJobId(),
+                    event.getUrl(),
+                    200,
+                    s3Key,
+                    rawContent,
+                    duration);
+            workerMetrics.recordSuccess(JobType.HTTP, duration);
             ack.acknowledge();
 
         } catch (WebClientResponseException ex) {
@@ -61,6 +70,7 @@ public class HttpWorker {
             log.error("HTTP error: jobId={}, status={}", event.getJobId(), ex.getStatusCode());
             resultPublisher.publishFailure(event.getJobId(), event.getUrl(),
                     ex.getMessage(), event.getAttemptNumber(), event.getMaxAttempts(), duration);
+            workerMetrics.recordFailure(JobType.HTTP, duration);
             ack.acknowledge();
 
         } catch (Exception ex) {
@@ -68,6 +78,7 @@ public class HttpWorker {
             log.error("Unexpected error: jobId={}", event.getJobId(), ex);
             resultPublisher.publishFailure(event.getJobId(), event.getUrl(),
                     ex.getMessage(), event.getAttemptNumber(), event.getMaxAttempts(), duration);
+            workerMetrics.recordFailure(JobType.HTTP, duration);
             ack.acknowledge();
         }
     }

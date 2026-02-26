@@ -23,6 +23,7 @@ public class ScrapeResultEvent {
     private String s3RawKey;        // pointer to raw dump in S3
     private String errorMessage;    // null on success
     private long durationMs;
+    private String rawContent;  // actual HTML or JSON body
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Instant completedAt;

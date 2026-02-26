@@ -22,13 +22,14 @@ public class ResultPublisher {
     private final KafkaTemplate<String, ScrapeResultEvent> kafkaTemplate;
 
     public void publishSuccess(UUID jobId, String url, int httpStatus,
-                               String s3RawKey, long durationMs) {
+                               String s3RawKey, String rawContent, long durationMs) {
         ScrapeResultEvent event = ScrapeResultEvent.builder()
                 .jobId(jobId)
                 .url(url)
                 .status(JobStatus.COMPLETED)
                 .httpStatusCode(httpStatus)
                 .s3RawKey(s3RawKey)
+                .rawContent(rawContent)   // ← include content
                 .durationMs(durationMs)
                 .completedAt(Instant.now())
                 .build();

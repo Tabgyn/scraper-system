@@ -26,3 +26,9 @@ kubectl rollout status deployment/scraper-scheduler -n $NAMESPACE
 kubectl rollout status deployment/results-processor -n $NAMESPACE
 
 echo "All services deployed successfully."
+
+echo "Deploying observability stack..."
+kubectl apply -f ../observability/prometheus/
+kubectl apply -f ../observability/grafana/
+kubectl apply -f ../observability/loki/
+echo "Grafana available at http://localhost:30300 (admin/admin)"

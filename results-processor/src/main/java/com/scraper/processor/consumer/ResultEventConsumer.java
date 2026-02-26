@@ -2,6 +2,7 @@ package com.scraper.processor.consumer;
 
 import com.scraper.common.enums.JobStatus;
 import com.scraper.common.events.ScrapeResultEvent;
+import com.scraper.processor.metrics.ScraperProcessorMetrics;
 import com.scraper.processor.service.DeduplicationService;
 import com.scraper.processor.service.ResultPersistenceService;
 import com.scraper.processor.service.S3StorageService;
@@ -19,6 +20,7 @@ public class ResultEventConsumer {
     private final DeduplicationService deduplicationService;
     private final S3StorageService s3StorageService;
     private final ResultPersistenceService resultPersistenceService;
+    private final ScraperProcessorMetrics scraperProcessorMetrics;
 
     @KafkaListener(
             topics = "results.raw",
@@ -30,19 +32,20 @@ public class ResultEventConsumer {
 
         try {
             if (!deduplicationService.isNew(event.getJobId())) {
+                scraperProcessorMetrics.recordDuplicate();
                 ack.acknowledge();
                 return;
             }
 
-            // Only store raw content for successful scrapes
             if (event.getStatus() == JobStatus.COMPLETED && event.getS3RawKey() != null) {
-                // Raw content would be passed through the event in a full implementation
-                // Here we store a metadata placeholder — real content comes from the worker
-                s3StorageService.store(event.getS3RawKey(),
-                        buildMetadataPlaceholder(event));
+                s3StorageService.store(event.getS3RawKey(), buildMetadataPlaceholder(event));
+                scraperProcessorMetrics.recordS3Stored();
             }
 
             resultPersistenceService.persist(event);
+            scraperProcessorMetrics.recordMongoStored();
+            scraperProcessorMetrics.recordProcessed();
+
             ack.acknowledge();
 
         } catch (Exception e) {
@@ -52,9 +55,17 @@ public class ResultEventConsumer {
     }
 
     private String buildMetadataPlaceholder(ScrapeResultEvent event) {
-        return String.format(
-                "{\"jobId\":\"%s\",\"url\":\"%s\",\"completedAt\":\"%s\"}",
-                event.getJobId(), event.getUrl(), event.getCompletedAt()
-        );
+        if (event.getStatus() == JobStatus.COMPLETED && event.getS3RawKey() != null) {
+            String content = event.getRawContent() != null
+                    ? event.getRawContent()
+                    : buildMetadataPlaceholder(event);
+
+            s3StorageService.store(event.getS3RawKey(), content);
+            scraperProcessorMetrics.recordS3Stored();
+        }
+
+        return "{\"jobId\":\"" + event.getJobId() + "\""
+                + ",\"url\":\"" + event.getUrl() + "\""
+                + ",\"completedAt\":\"" + event.getCompletedAt() + "\"}";
     }
 }

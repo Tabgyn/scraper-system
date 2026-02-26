@@ -3,6 +3,7 @@ C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scra
 C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\config\PlaywrightConfig.java
 C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\config\WebClientConfig.java
 C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\exception\ScrapeException.java
+C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\metrics\WorkerMetrics.java
 C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\proxy\ProxyHealthChecker.java
 C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\proxy\ProxyManager.java
 C:\Users\Tiago\source\repos\scraper-system\scraper-worker\src\main\java\com\scraper\worker\ScraperWorkerApplication.java

@@ -1,3 +1,4 @@
+com\scraper\worker\metrics\WorkerMetrics.class
 com\scraper\worker\config\WebClientConfig.class
 com\scraper\worker\worker\ApiWorker.class
 com\scraper\worker\config\PlaywrightConfig.class

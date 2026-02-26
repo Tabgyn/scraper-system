@@ -3,6 +3,7 @@ C:\Users\Tiago\source\repos\scraper-system\results-processor\src\main\java\com\s
 C:\Users\Tiago\source\repos\scraper-system\results-processor\src\main\java\com\scraper\processor\config\S3Config.java
 C:\Users\Tiago\source\repos\scraper-system\results-processor\src\main\java\com\scraper\processor\consumer\ResultEventConsumer.java
 C:\Users\Tiago\source\repos\scraper-system\results-processor\src\main\java\com\scraper\processor\document\ScrapeResultDocument.java
+C:\Users\Tiago\source\repos\scraper-system\results-processor\src\main\java\com\scraper\processor\metrics\ProcessorMetrics.java
 C:\Users\Tiago\source\repos\scraper-system\results-processor\src\main\java\com\scraper\processor\repository\ScrapeResultRepository.java
 C:\Users\Tiago\source\repos\scraper-system\results-processor\src\main\java\com\scraper\processor\ResultsProcessorApplication.java
 C:\Users\Tiago\source\repos\scraper-system\results-processor\src\main\java\com\scraper\processor\service\DeduplicationService.java

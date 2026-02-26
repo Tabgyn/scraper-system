@@ -4,6 +4,7 @@ import com.microsoft.playwright.*;
 import com.scraper.common.enums.JobType;
 import com.scraper.common.events.ScrapeJobEvent;
 import com.scraper.common.model.ProxyConfig;
+import com.scraper.worker.metrics.WorkerMetrics;
 import com.scraper.worker.proxy.ProxyManager;
 import com.scraper.worker.service.ResultPublisher;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,6 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Component
@@ -24,6 +23,7 @@ public class JsWorker {
     private final Browser browser;
     private final ProxyManager proxyManager;
     private final ResultPublisher resultPublisher;
+    private final WorkerMetrics workerMetrics;
 
     @KafkaListener(
             topics = "jobs.pending",
@@ -56,8 +56,14 @@ public class JsWorker {
             long duration = Instant.now().toEpochMilli() - start;
 
             String s3Key = "raw/" + event.getJobId() + ".html";
-            resultPublisher.publishSuccess(event.getJobId(), event.getUrl(),
-                    status, s3Key, duration);
+            resultPublisher.publishSuccess(
+                    event.getJobId(),
+                    event.getUrl(),
+                    status,
+                    s3Key,
+                    html,          // ← pass actual content
+                    duration);
+            workerMetrics.recordSuccess(JobType.HTTP, duration);
             ack.acknowledge();
 
         } catch (Exception ex) {
@@ -65,6 +71,7 @@ public class JsWorker {
             log.error("JS worker error: jobId={}", event.getJobId(), ex);
             resultPublisher.publishFailure(event.getJobId(), event.getUrl(),
                     ex.getMessage(), event.getAttemptNumber(), event.getMaxAttempts(), duration);
+            workerMetrics.recordFailure(JobType.HTTP, duration);
             ack.acknowledge();
 
         } finally {

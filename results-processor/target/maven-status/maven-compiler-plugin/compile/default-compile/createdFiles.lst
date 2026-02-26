@@ -1,11 +1,12 @@
 com\scraper\processor\repository\ScrapeResultRepository.class
-com\scraper\processor\ResultsProcessorApplication.class
-com\scraper\processor\config\S3Config.class
 com\scraper\processor\config\KafkaConsumerConfig.class
-com\scraper\processor\config\MongoConfig.class
+com\scraper\processor\metrics\ProcessorMetrics.class
 com\scraper\processor\consumer\ResultEventConsumer.class
 com\scraper\processor\service\ResultPersistenceService.class
 com\scraper\processor\document\ScrapeResultDocument.class
-com\scraper\processor\service\S3StorageService.class
 com\scraper\processor\document\ScrapeResultDocument$ScrapeResultDocumentBuilder.class
 com\scraper\processor\service\DeduplicationService.class
+com\scraper\processor\ResultsProcessorApplication.class
+com\scraper\processor\config\S3Config.class
+com\scraper\processor\config\MongoConfig.class
+com\scraper\processor\service\S3StorageService.class

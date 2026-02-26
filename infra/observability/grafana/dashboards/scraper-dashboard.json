@@ -1,0 +1,117 @@
+{
+  "title": "Scraper System",
+  "uid": "scraper-main",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Jobs Completed per Minute",
+      "type": "graph",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "targets": [
+        {
+          "expr": "rate(scraper_jobs_completed_total[1m])",
+          "legendFormat": "{{job_type}} - {{status}}"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Job Duration p95 (ms)",
+      "type": "graph",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, rate(scraper_jobs_duration_seconds_bucket[5m])) * 1000",
+          "legendFormat": "p95 {{job_type}}"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Kafka Consumer Lag",
+      "type": "graph",
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 },
+      "targets": [
+        {
+          "expr": "kafka_consumer_group_lag",
+          "legendFormat": "{{topic}} - {{group}}"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Proxy Pool Size",
+      "type": "stat",
+      "gridPos": { "x": 12, "y": 8, "w": 6, "h": 4 },
+      "targets": [
+        {
+          "expr": "scraper_proxy_pool_size",
+          "legendFormat": "Active Proxies"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Duplicate Results Skipped",
+      "type": "stat",
+      "gridPos": { "x": 18, "y": 8, "w": 6, "h": 4 },
+      "targets": [
+        {
+          "expr": "rate(scraper_results_duplicates_total[5m])",
+          "legendFormat": "Duplicates/min"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Rate Limit Hits by Domain",
+      "type": "graph",
+      "gridPos": { "x": 0, "y": 16, "w": 24, "h": 8 },
+      "targets": [
+        {
+          "expr": "topk(10, rate(scraper_ratelimit_hits_total[1m]))",
+          "legendFormat": "{{domain}}"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Worker Pod Count",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 24, "w": 8, "h": 4 },
+      "targets": [
+        {
+          "expr": "kube_deployment_status_replicas_available{deployment='scraper-worker'}",
+          "legendFormat": "Worker Pods"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "S3 Objects Stored",
+      "type": "stat",
+      "gridPos": { "x": 8, "y": 24, "w": 8, "h": 4 },
+      "targets": [
+        {
+          "expr": "increase(scraper_s3_stored_total[1h])",
+          "legendFormat": "Stored/hr"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "MongoDB Writes",
+      "type": "stat",
+      "gridPos": { "x": 16, "y": 24, "w": 8, "h": 4 },
+      "targets": [
+        {
+          "expr": "increase(scraper_mongo_stored_total[1h])",
+          "legendFormat": "Writes/hr"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "10s"
+}
